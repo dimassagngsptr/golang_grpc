@@ -1,0 +1,34 @@
+syntax = "proto3";
+package model;
+
+option go_package = "common/model";
+
+import "google/protobuf/empty.proto";
+
+service Addresses{
+  rpc LIST_ADDRESS(AddressUserId) returns (AddressList){}
+  rpc ADD_ADDRESS(AddressAndUserId) returns(google.protobuf.Empty){}
+}
+
+
+message Address{
+  uint32 id =1;
+  string address =2;
+}
+
+message AddressAndUserId{
+  uint32 user_id =1;
+  Address address =2;
+}
+
+message AddressUserId{
+  uint32 user_id =1;
+}
+
+message AddressList{
+  repeated Address list=1;
+}
+
+message AddressListByUser{
+  map<string, AddressList> list_address=1;
+}
